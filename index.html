@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Golf Scoreboard</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <h1>Virtual Golf Scoreboard</h1>
+    <form id="setup-form">
+      <label>Team A Players (comma separated):</label>
+      <input type="text" id="teamA" placeholder="Alice,Bob" required />
+      <label>Team B Players (comma separated):</label>
+      <input type="text" id="teamB" placeholder="Charlie,Dana" required />
+      <button type="submit">Start Game</button>
+    </form>
+
+    <div id="score-section" style="display:none;">
+      <h2>Hole <span id="hole-number">1</span>/18</h2>
+      <div id="score-inputs"></div>
+      <button id="next-hole">Next Hole</button>
+      <h3>Team Score: <span id="team-score"></span></h3>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
