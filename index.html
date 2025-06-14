@@ -12,10 +12,16 @@
     <h1>Team Golf Scorecard</h1>
 
     <form id="setup-form">
-      <label>Team A Players (comma separated):</label>
+      <label>Team A Name:</label>
+      <input type="text" id="teamAName" placeholder="Team A" required />
+      <label>Players (comma separated):</label>
       <input type="text" id="teamA" placeholder="Alice,Bob" required />
-      <label>Team B Players (comma separated):</label>
+
+      <label>Team B Name:</label>
+      <input type="text" id="teamBName" placeholder="Team B" required />
+      <label>Players (comma separated):</label>
       <input type="text" id="teamB" placeholder="Charlie,Dana" required />
+
       <button type="submit">Start Game</button>
     </form>
 

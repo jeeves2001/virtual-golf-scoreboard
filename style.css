@@ -5,7 +5,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 .container {
   max-width: 1000px;
   margin: auto;
@@ -15,51 +14,42 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px #ccc;
 }
-
 input, button {
   padding: 10px;
   margin: 5px 0;
   width: 100%;
   font-size: 16px;
 }
-
 button {
   background: #007b5f;
   color: white;
   border: none;
   cursor: pointer;
 }
-
 button:hover {
   background: #005e48;
 }
-
 h1, h2, h3 {
   text-align: center;
 }
-
 table.scorecard {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
-
 table.scorecard th,
 table.scorecard td {
   border: 1px solid #999;
   padding: 5px;
   text-align: center;
 }
-
 table.scorecard th {
   background-color: #eaeaea;
 }
-
 input.score-input {
   width: 50px;
   text-align: center;
 }
-
 .team-score {
   margin-top: 20px;
   text-align: center;

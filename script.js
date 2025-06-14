@@ -2,9 +2,14 @@
 let scores = [];
 let playersA = [];
 let playersB = [];
+let teamAName = "Team A";
+let teamBName = "Team B";
 
 document.getElementById("setup-form").addEventListener("submit", function (e) {
   e.preventDefault();
+
+  teamAName = document.getElementById("teamAName").value.trim() || "Team A";
+  teamBName = document.getElementById("teamBName").value.trim() || "Team B";
 
   playersA = document.getElementById("teamA").value.split(",").map(p => p.trim()).filter(p => p);
   playersB = document.getElementById("teamB").value.split(",").map(p => p.trim()).filter(p => p);
@@ -63,6 +68,15 @@ function renderScorecard() {
 
   playersA.forEach(p => table.appendChild(makePlayerRow(p)));
   playersB.forEach(p => table.appendChild(makePlayerRow(p)));
+
+  const summaryRow = document.createElement("tr");
+  summaryRow.id = "summary-row";
+  summaryRow.innerHTML = "<td><strong>Hole Win</strong></td>";
+  for (let h = 0; h < 18; h++) {
+    summaryRow.innerHTML += "<td id='hole-win-" + h + "'>–</td>";
+  }
+  summaryRow.innerHTML += "<td>—</td>";
+  table.appendChild(summaryRow);
 }
 
 function onScoreChange(e) {
@@ -86,20 +100,33 @@ function updateMatchPlayScore() {
   let teamAScore = 0;
   let teamBScore = 0;
 
+  const teamAInitial = teamAName[0].toUpperCase();
+  const teamBInitial = teamBName[0].toUpperCase();
+
   for (let h = 0; h < 18; h++) {
     const aStrokes = playersA.map(p => scores[p][h]).filter(v => v !== null);
     const bStrokes = playersB.map(p => scores[p][h]).filter(v => v !== null);
+    const cell = document.getElementById("hole-win-" + h);
 
     if (aStrokes.length && bStrokes.length) {
       const minA = Math.min(...aStrokes);
       const minB = Math.min(...bStrokes);
-      if (minA < minB) teamAScore++;
-      else if (minB < minA) teamBScore++;
+      if (minA < minB) {
+        teamAScore++;
+        if (cell) cell.textContent = teamAInitial;
+      } else if (minB < minA) {
+        teamBScore++;
+        if (cell) cell.textContent = teamBInitial;
+      } else {
+        if (cell) cell.textContent = "–";
+      }
+    } else {
+      if (cell) cell.textContent = "–";
     }
   }
 
   let result = "All Square";
-  if (teamAScore > teamBScore) result = "Team A +" + (teamAScore - teamBScore);
-  else if (teamBScore > teamAScore) result = "Team B +" + (teamBScore - teamAScore);
+  if (teamAScore > teamBScore) result = teamAName + " +" + (teamAScore - teamBScore);
+  else if (teamBScore > teamAScore) result = teamBName + " +" + (teamBScore - teamAScore);
   document.getElementById("team-score").textContent = result;
 }
