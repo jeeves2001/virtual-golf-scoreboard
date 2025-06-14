@@ -1,3 +1,4 @@
+
 let currentHole = 1;
 let scores = [];
 let playersA = [];
@@ -40,9 +41,8 @@ function renderHole() {
 
   var allPlayers = playersA.concat(playersB);
   allPlayers.forEach(function (player) {
-    container.innerHTML +=
-      '<label>' + player + ':</label>' +
-      '<input type="number" min="1" id="score-' + player + '" required />';
+    container.innerHTML += '<label>' + player + ':</label>' +
+                           '<input type="number" min="1" id="score-' + player + '" required />';
   });
 }
 
