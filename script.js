@@ -1,55 +1,100 @@
-
 let currentHole = 1;
 let scores = [];
 let playersA = [];
 let playersB = [];
 
-document.getElementById("setup-form").addEventListener("submit", function(e) {
+document.getElementById("setup-form").addEventListener("submit", function (e) {
   e.preventDefault();
-  playersA = document.getElementById("teamA").value.split(",").map(p => p.trim());
-  playersB = document.getElementById("teamB").value.split(",").map(p => p.trim());
-  scores = Array(18).fill().map(() => ({ A: {}, B: {} }));
+
+  // Get and sanitize player names
+  playersA = document.getElementById("teamA").value.split(",").map(function (p) {
+    return p.trim();
+  }).filter(function (p) {
+    return p.length > 0;
+  });
+
+  playersB = document.getElementById("teamB").value.split(",").map(function (p) {
+    return p.trim();
+  }).filter(function (p) {
+    return p.length > 0;
+  });
+
+  if (playersA.length === 0 || playersB.length === 0) {
+    alert("Please enter at least one player per team.");
+    return;
+  }
+
+  // Initialise scores
+  scores = Array(18).fill().map(function () {
+    return { A: {}, B: {} };
+  });
+
   document.getElementById("setup-form").style.display = "none";
   document.getElementById("score-section").style.display = "block";
   renderHole();
+  document.getElementById("team-score").textContent = calculateMatchPlay();
 });
 
 function renderHole() {
   document.getElementById("hole-number").textContent = currentHole;
-  const container = document.getElementById("score-inputs");
+  var container = document.getElementById("score-inputs");
   container.innerHTML = "<h4>Enter scores:</h4>";
-  [...playersA, ...playersB].forEach(player => {
-    container.innerHTML += \`
-      <label>\${player}:</label>
-      <input type="number" min="1" id="score-\${player}" />
-    \`;
+
+  var allPlayers = playersA.concat(playersB);
+  allPlayers.forEach(function (player) {
+    container.innerHTML +=
+      '<label>' + player + ':</label>' +
+      '<input type="number" min="1" id="score-' + player + '" required />';
   });
 }
 
 function calculateMatchPlay() {
-  let score = 0;
-  for (let h = 0; h < currentHole; h++) {
-    let minA = Math.min(...Object.values(scores[h].A));
-    let minB = Math.min(...Object.values(scores[h].B));
+  var score = 0;
+
+  for (var h = 0; h < currentHole; h++) {
+    var strokesA = Object.values(scores[h].A);
+    var strokesB = Object.values(scores[h].B);
+    if (strokesA.length === 0 || strokesB.length === 0) continue;
+
+    var minA = Math.min.apply(null, strokesA);
+    var minB = Math.min.apply(null, strokesB);
+
+    if (isNaN(minA) || isNaN(minB)) continue;
+
     if (minA < minB) score++;
     else if (minB < minA) score--;
   }
+
   if (score === 0) return "All Square";
-  return score > 0 ? \`Team A +\${score}\` : \`Team B +\${-score}\`;
+  return score > 0 ? "Team A +" + score : "Team B +" + (-score);
 }
 
-document.getElementById("next-hole").addEventListener("click", function() {
-  [...playersA].forEach(p => {
-    scores[currentHole - 1].A[p] = parseInt(document.getElementById("score-" + p).value);
-  });
-  [...playersB].forEach(p => {
-    scores[currentHole - 1].B[p] = parseInt(document.getElementById("score-" + p).value);
-  });
-  currentHole++;
-  if (currentHole > 18) {
-    document.getElementById("score-section").innerHTML = "<h2>Game Over</h2><p>Final Score: " + calculateMatchPlay() + "</p>";
-  } else {
-    renderHole();
-    document.getElementById("team-score").textContent = calculateMatchPlay();
+document.getElementById("next-hole").addEventListener("click", function () {
+  try {
+    playersA.forEach(function (p) {
+      var input = document.getElementById("score-" + p);
+      var val = parseInt(input.value);
+      if (isNaN(val)) throw new Error("Missing score for " + p);
+      scores[currentHole - 1].A[p] = val;
+    });
+
+    playersB.forEach(function (p) {
+      var input = document.getElementById("score-" + p);
+      var val = parseInt(input.value);
+      if (isNaN(val)) throw new Error("Missing score for " + p);
+      scores[currentHole - 1].B[p] = val;
+    });
+
+    currentHole++;
+
+    if (currentHole > 18) {
+      document.getElementById("score-section").innerHTML =
+        "<h2>Game Over</h2><p>Final Score: " + calculateMatchPlay() + "</p>";
+    } else {
+      renderHole();
+      document.getElementById("team-score").textContent = calculateMatchPlay();
+    }
+  } catch (err) {
+    alert(err.message);
   }
 });
