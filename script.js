@@ -6,7 +6,6 @@ let playersB = [];
 document.getElementById("setup-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  // Get and sanitize player names
   playersA = document.getElementById("teamA").value.split(",").map(function (p) {
     return p.trim();
   }).filter(function (p) {
@@ -24,7 +23,6 @@ document.getElementById("setup-form").addEventListener("submit", function (e) {
     return;
   }
 
-  // Initialise scores
   scores = Array(18).fill().map(function () {
     return { A: {}, B: {} };
   });
