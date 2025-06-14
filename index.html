@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Virtual Golf Scoreboard</title>
+  <title>Golf Team Scorecard</title>
   <link href="style.css" rel="stylesheet" />
 </head>
 <body>
   <div class="container">
-    <h1>Virtual Golf Scoreboard</h1>
+    <h1>Team Golf Scorecard</h1>
+
     <form id="setup-form">
       <label>Team A Players (comma separated):</label>
       <input type="text" id="teamA" placeholder="Alice,Bob" required />
@@ -19,10 +20,13 @@
     </form>
 
     <div id="score-section" style="display:none;">
-      <h2>Hole <span id="hole-number">1</span>/18</h2>
-      <div id="score-inputs"></div>
-      <button id="next-hole">Next Hole</button>
-      <h3>Team Score: <span id="team-score"></span></h3>
+      <h2>Hole <span id="hole-number">1</span> of 18</h2>
+      <div id="scorecard-wrapper">
+        <table id="scorecard" class="scorecard"></table>
+      </div>
+      <div class="team-score">
+        <h3>Match Play Score: <span id="team-score"></span></h3>
+      </div>
     </div>
   </div>
 

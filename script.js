@@ -14,7 +14,6 @@ document.getElementById("setup-form").addEventListener("submit", function (e) {
     return;
   }
 
-  // Init scores
   const allPlayers = [...playersA, ...playersB];
   scores = {};
   allPlayers.forEach(p => {
@@ -39,7 +38,7 @@ function renderScorecard() {
   headerRow.innerHTML += "<th>Total</th>";
   table.appendChild(headerRow);
 
-  const makePlayerRow = (player, team) => {
+  const makePlayerRow = (player) => {
     const row = document.createElement("tr");
     row.innerHTML = "<td>" + player + "</td>";
     for (let h = 0; h < 18; h++) {
@@ -62,8 +61,8 @@ function renderScorecard() {
     return row;
   };
 
-  playersA.forEach(p => table.appendChild(makePlayerRow(p, "A")));
-  playersB.forEach(p => table.appendChild(makePlayerRow(p, "B")));
+  playersA.forEach(p => table.appendChild(makePlayerRow(p)));
+  playersB.forEach(p => table.appendChild(makePlayerRow(p)));
 }
 
 function onScoreChange(e) {
