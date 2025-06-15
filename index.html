@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,6 @@
 <body>
   <div class="container">
     <h1>Team Golf Scorecard</h1>
-
     <form id="setup-form">
       <fieldset>
         <legend><strong>Team A Setup</strong></legend>
@@ -19,7 +17,6 @@
         <label for="teamA">Team A Players (comma separated):</label>
         <input type="text" id="teamA" placeholder="Alice,Bob" required />
       </fieldset>
-
       <fieldset>
         <legend><strong>Team B Setup</strong></legend>
         <label for="teamBName">Team B Name:</label>
@@ -27,21 +24,20 @@
         <label for="teamB">Team B Players (comma separated):</label>
         <input type="text" id="teamB" placeholder="Charlie,Dana" required />
       </fieldset>
-
       <button type="submit">Start Game</button>
     </form>
-
     <div id="score-section" style="display:none;">
       <h2>Hole <span id="hole-number">1</span> of 18</h2>
-      <div id="scorecard-wrapper" style="overflow-x:auto;">
-        <table id="scorecard" class="scorecard"></table>
+      <div id="scorecard-wrapper">
+        <div class="table-container">
+          <table id="scorecard" class="scorecard"></table>
+        </div>
       </div>
       <div class="team-score">
         <h3>Match Play Score: <span id="team-score"></span></h3>
       </div>
     </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
