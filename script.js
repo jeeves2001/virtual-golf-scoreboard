@@ -104,29 +104,29 @@ function updateMatchPlayScore() {
   const teamBInitial = teamBName[0].toUpperCase();
 
   for (let h = 0; h < 18; h++) {
-    const aStrokes = playersA.map(p => scores[p][h]).filter(v => v !== null);
-    const bStrokes = playersB.map(p => scores[p][h]).filter(v => v !== null);
+    const aStrokes = playersA.map(p => scores[p][h]).filter(v => v !== null).sort((a, b) => a - b);
+    const bStrokes = playersB.map(p => scores[p][h]).filter(v => v !== null).sort((a, b) => a - b);
     const cell = document.getElementById("hole-win-" + h);
 
-    if (aStrokes.length && bStrokes.length) {
-      const minA = Math.min(...aStrokes);
-      const minB = Math.min(...bStrokes);
-      if (minA < minB) {
-        teamAScore++;
-        if (cell) cell.textContent = teamAInitial;
-      } else if (minB < minA) {
-        teamBScore++;
-        if (cell) cell.textContent = teamBInitial;
-      } else {
-        if (cell) cell.textContent = "–";
-      }
+    let result = 0;
+    for (let i = 0; i < Math.min(aStrokes.length, bStrokes.length); i++) {
+      if (aStrokes[i] < bStrokes[i]) { result = 1; break; }
+      if (bStrokes[i] < aStrokes[i]) { result = -1; break; }
+    }
+
+    if (result === 1) {
+      teamAScore++;
+      if (cell) cell.textContent = teamAInitial;
+    } else if (result === -1) {
+      teamBScore++;
+      if (cell) cell.textContent = teamBInitial;
     } else {
       if (cell) cell.textContent = "–";
     }
   }
 
-  let result = "All Square";
-  if (teamAScore > teamBScore) result = teamAName + " +" + (teamAScore - teamBScore);
-  else if (teamBScore > teamAScore) result = teamBName + " +" + (teamBScore - teamAScore);
-  document.getElementById("team-score").textContent = result;
+  let resultText = "All Square";
+  if (teamAScore > teamBScore) resultText = teamAName + " +" + (teamAScore - teamBScore);
+  else if (teamBScore > teamAScore) resultText = teamBName + " +" + (teamBScore - teamAScore);
+  document.getElementById("team-score").textContent = resultText;
 }

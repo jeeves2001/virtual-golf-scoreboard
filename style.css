@@ -32,8 +32,11 @@ button:hover {
 h1, h2, h3 {
   text-align: center;
 }
+#scorecard-wrapper {
+  overflow-x: auto;
+}
 table.scorecard {
-  width: 100%;
+  min-width: 960px;
   border-collapse: collapse;
   margin-top: 20px;
 }
