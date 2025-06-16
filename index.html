@@ -3,35 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Golf Team Scorecard</title>
-  <link href="style.css" rel="stylesheet" />
+  <title>Golf Scorecard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Team Golf Scorecard</h1>
+    <h1>Golf Scorecard</h1>
     <form id="setup-form">
       <fieldset>
-        <legend><strong>Team A Setup</strong></legend>
-        <label for="teamAName">Team A Name:</label>
+        <label>Team A Name:</label>
         <input type="text" id="teamAName" placeholder="Team A" required />
-        <label for="teamA">Team A Players (comma separated):</label>
+        <label>Team A Players (comma separated):</label>
         <input type="text" id="teamA" placeholder="Alice,Bob" required />
       </fieldset>
       <fieldset>
-        <legend><strong>Team B Setup</strong></legend>
-        <label for="teamBName">Team B Name:</label>
+        <label>Team B Name:</label>
         <input type="text" id="teamBName" placeholder="Team B" required />
-        <label for="teamB">Team B Players (comma separated):</label>
+        <label>Team B Players (comma separated):</label>
         <input type="text" id="teamB" placeholder="Charlie,Dana" required />
+      </fieldset>
+      <fieldset>
+        <label>Scoring Logic:</label>
+        <select id="scoring-mode">
+          <option value="skins">Skins (Use top 2 scores)</option>
+          <option value="lowest">Lowest Score Only</option>
+        </select>
       </fieldset>
       <button type="submit">Start Game</button>
     </form>
     <div id="score-section" style="display:none;">
-      <h2>Hole <span id="hole-number">1</span> of 18</h2>
-      <div id="scorecard-wrapper">
-        <div class="table-container">
-          <table id="scorecard" class="scorecard"></table>
-        </div>
+      <h2>Scorecard</h2>
+      <div class="table-container">
+        <table id="scorecard" class="scorecard"></table>
       </div>
       <div class="team-score">
         <h3>Match Play Score: <span id="team-score"></span></h3>
