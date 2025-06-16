@@ -1,44 +1,60 @@
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background: #1e1e1e;
+  color: #fff;
   margin: 0;
   padding: 0;
-  background: #212529;
-  color: #f8f9fa;
 }
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
   padding: 20px;
 }
 h1, h2 {
   text-align: center;
+  color: #ffd700;
 }
 form fieldset {
-  border: 1px solid #666;
-  padding: 15px;
-  margin: 10px 0;
+  border: 1px solid #444;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #2c2c2c;
 }
 input, select, button {
   width: 100%;
   padding: 10px;
-  margin: 5px 0;
+  margin-top: 5px;
+  font-size: 16px;
 }
 button {
-  background: #28a745;
+  background: #009688;
   color: white;
-  font-weight: bold;
   border: none;
+  cursor: pointer;
 }
-.table-container {
+.scorecard-container {
   overflow-x: auto;
 }
 table.scorecard {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 15px;
 }
 table.scorecard th, table.scorecard td {
-  border: 1px solid #444;
-  padding: 8px;
+  border: 1px solid #666;
+  padding: 10px;
+  text-align: center;
+  background-color: #333;
+}
+table.scorecard th {
+  background-color: #444;
+  color: #ffd700;
+}
+input.score-input {
+  width: 50px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #888;
   text-align: center;
 }

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Golf Scorecard</title>
+  <title>Walkabout Style Golf Scorecard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Golf Scorecard</h1>
+    <h1>Walkabout Mini Golf Scorecard</h1>
     <form id="setup-form">
       <fieldset>
         <label>Team A Name:</label>
@@ -18,22 +18,23 @@
       </fieldset>
       <fieldset>
         <label>Team B Name:</label>
-        <input type="text" id="teamBName" placeholder="Team B" required />
+        <input type="text" id="teamBName" placeholder="Charlie,Dana" required />
         <label>Team B Players (comma separated):</label>
         <input type="text" id="teamB" placeholder="Charlie,Dana" required />
       </fieldset>
       <fieldset>
         <label>Scoring Logic:</label>
         <select id="scoring-mode">
-          <option value="skins">Skins (Use top 2 scores)</option>
+          <option value="skins">Skins (Top 2 scores)</option>
           <option value="lowest">Lowest Score Only</option>
         </select>
       </fieldset>
       <button type="submit">Start Game</button>
     </form>
+
     <div id="score-section" style="display:none;">
       <h2>Scorecard</h2>
-      <div class="table-container">
+      <div class="scorecard-container">
         <table id="scorecard" class="scorecard"></table>
       </div>
       <div class="team-score">
